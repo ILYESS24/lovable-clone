@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   output: 'standalone',
   serverExternalPackages: ['better-sqlite3'],
   webpack: (config, { isServer }) => {
