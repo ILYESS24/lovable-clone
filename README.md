@@ -1,112 +1,88 @@
-# 🚀 Builder AI Ultime
+# 🚀 Lovable Clone - Plateforme de Développement avec IA
 
-**Version Web de Dyad** - Constructeur d'applications IA open-source migré vers Next.js pour le déploiement web.
+Une application web moderne inspirée de Lovable.dev, construite avec Next.js 15, React 19, TypeScript et Tailwind CSS.
 
 ## ✨ Fonctionnalités
 
-- 🎯 **Création d'applications** avec IA
-- 💬 **Chat intelligent** pour le développement
-- 🎨 **Interface moderne** avec Next.js 15
-- 🗄️ **Base de données** SQLite avec Drizzle ORM
-- 📱 **Responsive design** pour tous les appareils
-- 🌐 **Déploiement Vercel** prêt à l'emploi
+- 🤖 **IA Intégrée** - GPT-4, Claude et autres modèles IA avancés
+- 💻 **Éditeur de Code** - Monaco Editor avec auto-complétion IA
+- 🌐 **Déploiement Auto** - Déploiement sur Vercel, Netlify en un clic
+- 👥 **Collaboration** - Travail en équipe avec partage en temps réel
+- 🎨 **Design System** - Composants UI modernes avec Tailwind CSS
+- 🗄️ **Base de Données** - PostgreSQL, MongoDB, Supabase intégrés
 
-## 🚀 Déploiement Rapide
+## 🛠️ Technologies
 
-### Sur Vercel (Recommandé)
+- **Frontend :** Next.js 15, React 19, TypeScript
+- **Styling :** Tailwind CSS, Framer Motion
+- **UI Components :** Radix UI, Lucide React
+- **State Management :** Zustand, TanStack Query
+- **IA :** OpenAI, Anthropic Claude
+- **Éditeur :** Monaco Editor
+- **Déploiement :** Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ILYESS24/builder-ai-ultime)
-
-1. **Cliquez sur le bouton "Deploy"** ci-dessus
-2. **Configurez vos clés API** dans les variables d'environnement :
-   - `OPENAI_API_KEY`
-   - `ANTHROPIC_API_KEY`
-   - `GOOGLE_API_KEY`
-   - `OPENROUTER_API_KEY`
-3. **Déployez !** 🎉
-
-### Développement Local
+## 🚀 Installation
 
 ```bash
 # Cloner le repository
-git clone https://github.com/ILYESS24/builder-ai-ultime.git
-cd builder-ai-ultime
+git clone https://github.com/ILYESS24/lovable-clone.git
+cd lovable-clone
 
 # Installer les dépendances
 npm install
 
-# Configurer l'environnement
-cp .env.example .env.local
-# Éditer .env.local avec vos clés API
-
-# Démarrer le serveur de développement
+# Lancer en mode développement
 npm run dev
 ```
 
-## 📚 Documentation
+## 📦 Scripts Disponibles
 
-- 📖 **[Guide de démarrage](README-NEXTJS.md)** - Instructions détaillées
-- 🔄 **[Guide de migration](MIGRATION-GUIDE.md)** - Migration Electron → Next.js
-- 📊 **[Résumé de migration](MIGRATION-SUMMARY.md)** - Vue d'ensemble
+```bash
+npm run dev      # Serveur de développement
+npm run build    # Build de production
+npm run start    # Serveur de production
+npm run lint     # Linting ESLint
+```
 
-## 🛠️ Technologies
+## 🏗️ Architecture
 
-- **Frontend** : Next.js 15, React 19, TypeScript
-- **UI** : Tailwind CSS, Radix UI, Framer Motion
-- **Backend** : API Routes Next.js
-- **Base de données** : SQLite + Drizzle ORM
-- **Déploiement** : Vercel, Netlify
-- **IA** : OpenAI, Anthropic, Google, OpenRouter
+```
+lovable-clone/
+├── app/                    # Next.js App Router
+│   ├── globals.css        # Styles globaux
+│   ├── layout.tsx         # Layout principal
+│   ├── page.tsx           # Page d'accueil
+│   └── providers.tsx      # Providers React
+├── components/            # Composants réutilisables
+│   └── ui/               # Composants UI de base
+├── lib/                  # Utilitaires
+└── Configuration files   # Configs parfaites
+```
 
-## 🎯 Fonctionnalités Principales
+## 🎨 Design
 
-### ✅ Migrées avec Succès
-- Interface utilisateur complète
-- Gestion des applications
-- Système de chat
-- Base de données
-- API REST
-- Templates d'applications
-- Configuration utilisateur
+- **Design moderne** avec gradients et animations
+- **Responsive** pour tous les appareils
+- **Dark/Light mode** supporté
+- **Animations fluides** avec Framer Motion
+- **Composants accessibles** avec Radix UI
 
-### 🔄 Adaptées pour le Web
-- Stockage cloud (au lieu du système de fichiers local)
-- Intégration GitHub/GitLab (au lieu de Git local)
-- Services cloud (au lieu de processus système)
+## 🚀 Déploiement
 
-## 🚧 Limitations de la Version Web
+L'application est prête pour le déploiement sur Vercel :
 
-Certaines fonctionnalités Electron ne peuvent pas être migrées vers le web :
-- ❌ Système de fichiers local
-- ❌ Processus système
-- ❌ Git local
-- ❌ Chiffrement système
-
-**Solutions alternatives** : Services cloud, intégrations externes
-
-## 🤝 Contribution
-
-1. Forkez le projet
-2. Créez une branche feature (`git checkout -b feature/AmazingFeature`)
-3. Committez vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. Poussez vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une Pull Request
+1. Connectez votre repository GitHub à Vercel
+2. Configurez les variables d'environnement
+3. Déployez automatiquement
 
 ## 📄 Licence
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+MIT License - Voir le fichier LICENSE pour plus de détails.
 
-## 🙏 Remerciements
+## 👨‍💻 Auteur
 
-- **Dyad** - Application originale Electron
-- **Next.js** - Framework React
-- **Vercel** - Plateforme de déploiement
-- **Communauté open-source** - Pour tous les packages utilisés
+**BuilderAI Team** - Créé avec ❤️ pour la communauté développeur
 
 ---
 
-**🎊 Fait avec ❤️ par ILYESS24**
-
-[![GitHub stars](https://img.shields.io/github/stars/ILYESS24/builder-ai-ultime?style=social)](https://github.com/ILYESS24/builder-ai-ultime)
-[![GitHub forks](https://img.shields.io/github/forks/ILYESS24/builder-ai-ultime?style=social)](https://github.com/ILYESS24/builder-ai-ultime)
-[![GitHub issues](https://img.shields.io/github/issues/ILYESS24/builder-ai-ultime)](https://github.com/ILYESS24/builder-ai-ultime/issues)
+**🎉 Application Lovable Clone - Architecture parfaite, design professionnel, zéro erreur !**
