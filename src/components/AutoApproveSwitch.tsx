@@ -1,27 +1,28 @@
-import { useSettings } from "@/hooks/useSettings";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { showInfo } from "@/lib/toast";
+'use client';
 
-export function AutoApproveSwitch({
-  showToast = true,
-}: {
-  showToast?: boolean;
-}) {
+import { Switch } from '@/components/ui/switch';
+import { useSettings } from '@/hooks/useSettings';
+
+export function AutoApproveSwitch() {
   const { settings, updateSettings } = useSettings();
+
+  const handleToggle = async (checked: boolean) => {
+    try {
+      await updateSettings({ autoApprove: checked });
+    } catch (error) {
+      console.error('Failed to update auto approve setting:', error);
+    }
+  };
+
   return (
     <div className="flex items-center space-x-2">
       <Switch
-        id="auto-approve"
-        checked={settings?.autoApproveChanges}
-        onCheckedChange={() => {
-          updateSettings({ autoApproveChanges: !settings?.autoApproveChanges });
-          if (!settings?.autoApproveChanges && showToast) {
-            showInfo("You can disable auto-approve in the Settings.");
-          }
-        }}
+        checked={settings.autoApprove}
+        onCheckedChange={handleToggle}
       />
-      <Label htmlFor="auto-approve">Auto-approve</Label>
+      <label className="text-sm font-medium">
+        Auto-approve
+      </label>
     </div>
   );
 }
