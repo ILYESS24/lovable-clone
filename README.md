@@ -1,29 +1,112 @@
-# Dyad
+# 🚀 Builder AI Ultime
 
-Dyad is a local, open-source AI app builder. It's fast, private, and fully under your control — like Lovable, v0, or Bolt, but running right on your machine.
+**Version Web de Dyad** - Constructeur d'applications IA open-source migré vers Next.js pour le déploiement web.
 
-[![Image](https://github.com/user-attachments/assets/f6c83dfc-6ffd-4d32-93dd-4b9c46d17790)](http://dyad.sh/)
+## ✨ Fonctionnalités
 
-More info at: [http://dyad.sh/](http://dyad.sh/)
+- 🎯 **Création d'applications** avec IA
+- 💬 **Chat intelligent** pour le développement
+- 🎨 **Interface moderne** avec Next.js 15
+- 🗄️ **Base de données** SQLite avec Drizzle ORM
+- 📱 **Responsive design** pour tous les appareils
+- 🌐 **Déploiement Vercel** prêt à l'emploi
 
-## 🚀 Features
+## 🚀 Déploiement Rapide
 
-- ⚡️ **Local**: Fast, private and no lock-in.
-- 🛠 **Bring your own keys**: Use your own AI API keys — no vendor lock-in.
-- 🖥️ **Cross-platform**: Easy to run on Mac or Windows.
+### Sur Vercel (Recommandé)
 
-## 📦 Download
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ILYESS24/builder-ai-ultime)
 
-No sign-up required. Just download and go.
+1. **Cliquez sur le bouton "Deploy"** ci-dessus
+2. **Configurez vos clés API** dans les variables d'environnement :
+   - `OPENAI_API_KEY`
+   - `ANTHROPIC_API_KEY`
+   - `GOOGLE_API_KEY`
+   - `OPENROUTER_API_KEY`
+3. **Déployez !** 🎉
 
-### [👉 Download for your platform](https://www.dyad.sh/#download)
+### Développement Local
 
-## 🤝 Community
+```bash
+# Cloner le repository
+git clone https://github.com/ILYESS24/builder-ai-ultime.git
+cd builder-ai-ultime
 
-Join our growing community of AI app builders on **Reddit**: [r/dyadbuilders](https://www.reddit.com/r/dyadbuilders/) - share your projects and get help from the community!
+# Installer les dépendances
+npm install
 
-## 🛠️ Contributing
+# Configurer l'environnement
+cp .env.example .env.local
+# Éditer .env.local avec vos clés API
 
-**Dyad** is open-source (Apache 2.0 licensed).
+# Démarrer le serveur de développement
+npm run dev
+```
 
-If you're interested in contributing to dyad, please read our [contributing](./CONTRIBUTING.md) doc.
+## 📚 Documentation
+
+- 📖 **[Guide de démarrage](README-NEXTJS.md)** - Instructions détaillées
+- 🔄 **[Guide de migration](MIGRATION-GUIDE.md)** - Migration Electron → Next.js
+- 📊 **[Résumé de migration](MIGRATION-SUMMARY.md)** - Vue d'ensemble
+
+## 🛠️ Technologies
+
+- **Frontend** : Next.js 15, React 19, TypeScript
+- **UI** : Tailwind CSS, Radix UI, Framer Motion
+- **Backend** : API Routes Next.js
+- **Base de données** : SQLite + Drizzle ORM
+- **Déploiement** : Vercel, Netlify
+- **IA** : OpenAI, Anthropic, Google, OpenRouter
+
+## 🎯 Fonctionnalités Principales
+
+### ✅ Migrées avec Succès
+- Interface utilisateur complète
+- Gestion des applications
+- Système de chat
+- Base de données
+- API REST
+- Templates d'applications
+- Configuration utilisateur
+
+### 🔄 Adaptées pour le Web
+- Stockage cloud (au lieu du système de fichiers local)
+- Intégration GitHub/GitLab (au lieu de Git local)
+- Services cloud (au lieu de processus système)
+
+## 🚧 Limitations de la Version Web
+
+Certaines fonctionnalités Electron ne peuvent pas être migrées vers le web :
+- ❌ Système de fichiers local
+- ❌ Processus système
+- ❌ Git local
+- ❌ Chiffrement système
+
+**Solutions alternatives** : Services cloud, intégrations externes
+
+## 🤝 Contribution
+
+1. Forkez le projet
+2. Créez une branche feature (`git checkout -b feature/AmazingFeature`)
+3. Committez vos changements (`git commit -m 'Add some AmazingFeature'`)
+4. Poussez vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrez une Pull Request
+
+## 📄 Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## 🙏 Remerciements
+
+- **Dyad** - Application originale Electron
+- **Next.js** - Framework React
+- **Vercel** - Plateforme de déploiement
+- **Communauté open-source** - Pour tous les packages utilisés
+
+---
+
+**🎊 Fait avec ❤️ par ILYESS24**
+
+[![GitHub stars](https://img.shields.io/github/stars/ILYESS24/builder-ai-ultime?style=social)](https://github.com/ILYESS24/builder-ai-ultime)
+[![GitHub forks](https://img.shields.io/github/forks/ILYESS24/builder-ai-ultime?style=social)](https://github.com/ILYESS24/builder-ai-ultime)
+[![GitHub issues](https://img.shields.io/github/issues/ILYESS24/builder-ai-ultime)](https://github.com/ILYESS24/builder-ai-ultime/issues)
