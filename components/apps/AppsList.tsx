@@ -1,51 +1,59 @@
-'use client'
+'use client';
 
-import { useQuery } from '@tanstack/react-query'
-import { ApiClient } from '@/lib/api-client'
-import { AppCard } from './AppCard'
-import { Loader2 } from 'lucide-react'
+import { useEffect, useState } from 'react';
+import { AppCard } from './AppCard';
+import { apiClient } from '@/lib/api-client';
+
+interface App {
+  id: string;
+  name: string;
+  description?: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export function AppsList() {
-  const apiClient = ApiClient.getInstance()
-  
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['apps'],
-    queryFn: () => apiClient.listApps(),
-  })
+  const [apps, setApps] = useState<App[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center p-8">
-        <Loader2 className="h-8 w-8 animate-spin" />
-        <span className="ml-2">Chargement des applications...</span>
-      </div>
-    )
+  useEffect(() => {
+    const fetchApps = async () => {
+      try {
+        const data = await apiClient.getApps();
+        setApps(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Erreur lors du chargement');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchApps();
+  }, []);
+
+  if (loading) {
+    return <div className="text-center py-8">Chargement...</div>;
   }
 
   if (error) {
-    return (
-      <div className="text-center p-8">
-        <p className="text-red-500">Erreur lors du chargement des applications</p>
-      </div>
-    )
+    return <div className="text-center py-8 text-red-500">Erreur: {error}</div>;
   }
 
-  if (!data?.apps || data.apps.length === 0) {
+  if (apps.length === 0) {
     return (
-      <div className="text-center p-8">
-        <p className="text-gray-500">Aucune application trouvée</p>
-        <p className="text-sm text-gray-400 mt-2">
-          Créez votre première application pour commencer
-        </p>
+      <div className="text-center py-8">
+        <p className="text-gray-500 mb-4">Aucune application trouvée</p>
+        <p className="text-sm text-gray-400">Créez votre première application pour commencer</p>
       </div>
-    )
+    );
   }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {data.apps.map((app: any) => (
+      {apps.map((app) => (
         <AppCard key={app.id} app={app} />
       ))}
     </div>
-  )
+  );
 }

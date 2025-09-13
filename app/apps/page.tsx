@@ -1,5 +1,5 @@
-import { AppsList } from '@/components/apps/AppsList'
-import { CreateAppButton } from '@/components/apps/CreateAppButton'
+import { AppsList } from '@/components/apps/AppsList';
+import { CreateAppButton } from '@/components/apps/CreateAppButton';
 
 export default function AppsPage() {
   return (
@@ -10,5 +10,5 @@ export default function AppsPage() {
       </div>
       <AppsList />
     </div>
-  )
+  );
 }

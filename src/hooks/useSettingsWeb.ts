@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 
 export interface UserSettings {
@@ -36,6 +38,12 @@ export function useSettings() {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') {
+      setLoading(false);
+      return;
+    }
+
     // Load settings from localStorage
     const loadSettings = () => {
       try {
@@ -68,7 +76,9 @@ export function useSettings() {
       const updated = { ...settings, ...newSettings };
       setSettings(updated);
       
-      localStorage.setItem('dyad-settings', JSON.stringify(updated));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('dyad-settings', JSON.stringify(updated));
+      }
       setError(null);
       return updated;
     } catch (error) {
@@ -83,16 +93,18 @@ export function useSettings() {
   const refreshSettings = async () => {
     setLoading(true);
     try {
-      const stored = localStorage.getItem('dyad-settings');
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        setSettings({ ...defaultSettings, ...parsed });
-      }
-      
-      const storedEnvVars = localStorage.getItem('dyad-env-vars');
-      if (storedEnvVars) {
-        const parsed = JSON.parse(storedEnvVars);
-        setEnvVars(parsed);
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('dyad-settings');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          setSettings({ ...defaultSettings, ...parsed });
+        }
+        
+        const storedEnvVars = localStorage.getItem('dyad-env-vars');
+        if (storedEnvVars) {
+          const parsed = JSON.parse(storedEnvVars);
+          setEnvVars(parsed);
+        }
       }
       setError(null);
     } catch (error) {

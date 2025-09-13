@@ -1,18 +1,11 @@
-import { AppDetail } from '@/components/apps/AppDetail'
-import { notFound } from 'next/navigation'
+import { AppDetail } from '@/components/apps/AppDetail';
 
 interface AppPageProps {
   params: {
-    id: string
-  }
+    id: string;
+  };
 }
 
 export default function AppPage({ params }: AppPageProps) {
-  const appId = parseInt(params.id)
-  
-  if (isNaN(appId)) {
-    notFound()
-  }
-
-  return <AppDetail appId={appId} />
+  return <AppDetail appId={params.id} />;
 }

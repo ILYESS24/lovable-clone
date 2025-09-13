@@ -1,158 +1,122 @@
-'use client'
+'use client';
 
-import { useQuery } from '@tanstack/react-query'
-import { ApiClient } from '@/lib/api-client'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, Play, Square, Settings } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { formatDistanceToNow } from 'date-fns'
-import { fr } from 'date-fns/locale'
+import { useEffect, useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import { apiClient } from '@/lib/api-client';
+
+interface App {
+  id: string;
+  name: string;
+  description?: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface AppDetailProps {
-  appId: number
+  appId: string;
 }
 
 export function AppDetail({ appId }: AppDetailProps) {
-  const router = useRouter()
-  const apiClient = ApiClient.getInstance()
-  
-  const { data: app, isLoading, error } = useQuery({
-    queryKey: ['app', appId],
-    queryFn: () => apiClient.getApp(appId),
-  })
+  const [app, setApp] = useState<App | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
-  if (isLoading) {
-    return (
-      <div className="container mx-auto p-6">
-        <div className="flex items-center justify-center p-8">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-            <p>Chargement de l'application...</p>
-          </div>
-        </div>
-      </div>
-    )
+  useEffect(() => {
+    const fetchApp = async () => {
+      try {
+        const data = await apiClient.getApp(appId);
+        setApp(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Erreur lors du chargement');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchApp();
+  }, [appId]);
+
+  if (loading) {
+    return <div className="container mx-auto p-6">Chargement...</div>;
   }
 
-  if (error || !app) {
+  if (error) {
     return (
       <div className="container mx-auto p-6">
-        <div className="text-center p-8">
-          <p className="text-red-500 mb-4">Erreur lors du chargement de l'application</p>
-          <Button onClick={() => router.back()}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Retour
+        <div className="text-center py-8">
+          <p className="text-red-500 mb-4">Erreur: {error}</p>
+          <Button onClick={() => router.push('/apps')}>
+            Retour aux applications
           </Button>
         </div>
       </div>
-    )
+    );
+  }
+
+  if (!app) {
+    return (
+      <div className="container mx-auto p-6">
+        <div className="text-center py-8">
+          <p className="text-gray-500 mb-4">Application non trouvée</p>
+          <Button onClick={() => router.push('/apps')}>
+            Retour aux applications
+          </Button>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="container mx-auto p-6">
-      <div className="flex items-center gap-4 mb-6">
-        <Button variant="outline" onClick={() => router.back()}>
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Retour
-        </Button>
+      <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-3xl font-bold">{app.name}</h1>
-          <p className="text-muted-foreground">
-            Créé {formatDistanceToNow(new Date(app.createdAt), { 
-              addSuffix: true, 
-              locale: fr 
-            })}
-          </p>
+          {app.description && (
+            <p className="text-gray-600 mt-2">{app.description}</p>
+          )}
         </div>
+        <Badge variant="secondary">Active</Badge>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Informations</CardTitle>
-              <CardDescription>
-                Détails de l'application
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-muted-foreground">Nom</label>
-                  <p className="text-sm">{app.name}</p>
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-muted-foreground">Template</label>
-                  <Badge variant="secondary">{app.templateId}</Badge>
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-muted-foreground">Chemin</label>
-                  <p className="text-sm font-mono">{app.path}</p>
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-muted-foreground">Dernière modification</label>
-                  <p className="text-sm">
-                    {formatDistanceToNow(new Date(app.updatedAt), { 
-                      addSuffix: true, 
-                      locale: fr 
-                    })}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Informations</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <div>
+              <span className="font-medium">ID:</span> {app.id}
+            </div>
+            <div>
+              <span className="font-medium">Créé:</span> {new Date(app.createdAt).toLocaleString()}
+            </div>
+            <div>
+              <span className="font-medium">Modifié:</span> {new Date(app.updatedAt).toLocaleString()}
+            </div>
+          </CardContent>
+        </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Chats</CardTitle>
-              <CardDescription>
-                Historique des conversations
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground text-sm">
-                Les chats seront affichés ici une fois implémentés.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Actions</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <Button className="w-full">
-                <Play className="h-4 w-4 mr-2" />
-                Démarrer l'application
-              </Button>
-              <Button variant="outline" className="w-full">
-                <Square className="h-4 w-4 mr-2" />
-                Arrêter l'application
-              </Button>
-              <Button variant="outline" className="w-full">
-                <Settings className="h-4 w-4 mr-2" />
-                Paramètres
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Statut</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-sm">Prêt</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Actions</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <Button className="w-full">
+              Ouvrir l'éditeur
+            </Button>
+            <Button variant="outline" className="w-full">
+              Paramètres
+            </Button>
+            <Button variant="outline" className="w-full">
+              Historique
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     </div>
-  )
+  );
 }

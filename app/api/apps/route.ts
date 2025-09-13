@@ -1,47 +1,44 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
-import { apps } from '@/lib/db/schema'
-import { desc } from 'drizzle-orm'
-import { initializeDatabase } from '@/lib/db'
+import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/lib/db';
+import { apps } from '@/lib/db/schema';
+import { eq } from 'drizzle-orm';
 
 export async function GET() {
   try {
-    initializeDatabase()
-    
-    const appsList = await db.query.apps.findMany({
-      orderBy: [desc(apps.createdAt)],
-    })
-
-    return NextResponse.json({ apps: appsList, appBasePath: '/apps' })
+    const allApps = await db.select().from(apps);
+    return NextResponse.json(allApps);
   } catch (error) {
-    console.error('Error fetching apps:', error)
-    return NextResponse.json({ error: 'Failed to fetch apps' }, { status: 500 })
+    console.error('Error fetching apps:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch apps' },
+      { status: 500 }
+    );
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    initializeDatabase()
-    
-    const body = await request.json()
-    const { name, templateId } = body
+    const body = await request.json();
+    const { name, description } = body;
 
     if (!name) {
-      return NextResponse.json({ error: 'App name is required' }, { status: 400 })
+      return NextResponse.json(
+        { error: 'Name is required' },
+        { status: 400 }
+      );
     }
 
-    // Create new app
-    const [newApp] = await db.insert(apps).values({
+    const newApp = await db.insert(apps).values({
       name,
-      path: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-      templateId: templateId || 'default',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }).returning()
+      description: description || null,
+    }).returning();
 
-    return NextResponse.json({ app: newApp })
+    return NextResponse.json(newApp[0], { status: 201 });
   } catch (error) {
-    console.error('Error creating app:', error)
-    return NextResponse.json({ error: 'Failed to create app' }, { status: 500 })
+    console.error('Error creating app:', error);
+    return NextResponse.json(
+      { error: 'Failed to create app' },
+      { status: 500 }
+    );
   }
 }

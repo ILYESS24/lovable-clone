@@ -1,14 +1,17 @@
-import { toast } from 'sonner'
-
-export function showError(error: Error | string) {
-  const message = typeof error === 'string' ? error : error.message
-  toast.error(message)
-}
+import { toast } from 'sonner';
 
 export function showSuccess(message: string) {
-  toast.success(message)
+  toast.success(message);
+}
+
+export function showError(message: string) {
+  toast.error(message);
 }
 
 export function showInfo(message: string) {
-  toast.info(message)
+  toast.info(message);
+}
+
+export function showWarning(message: string) {
+  toast.warning(message);
 }
