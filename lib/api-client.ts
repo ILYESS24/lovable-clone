@@ -1,56 +1,41 @@
-const API_BASE_URL = '/api';
+// API client pour Next.js
+export class ApiClient {
+  private baseUrl: string;
 
-export interface App {
-  id: string;
-  name: string;
-  description?: string;
-  createdAt: string;
-  updatedAt: string;
-}
+  constructor(baseUrl: string = '') {
+    this.baseUrl = baseUrl;
+  }
 
-export interface CreateAppData {
-  name: string;
-  description?: string;
-}
-
-class ApiClient {
-  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-    const url = `${API_BASE_URL}${endpoint}`;
-    const response = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-      ...options,
-    });
-
+  async get<T>(endpoint: string): Promise<T> {
+    const response = await fetch(`${this.baseUrl}${endpoint}`);
     if (!response.ok) {
-      const error = await response.json().catch(() => ({ error: 'Unknown error' }));
-      throw new Error(error.error || `HTTP ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-
     return response.json();
   }
 
-  async getApps(): Promise<App[]> {
-    return this.request<App[]>('/apps');
-  }
-
-  async getApp(id: string): Promise<App> {
-    return this.request<App>(`/apps/${id}`);
-  }
-
-  async createApp(data: CreateAppData): Promise<App> {
-    return this.request<App>('/apps', {
+  async post<T>(endpoint: string, data: any): Promise<T> {
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
   }
 
-  async deleteApp(id: string): Promise<void> {
-    await this.request(`/apps/${id}`, {
+  async delete<T>(endpoint: string): Promise<T> {
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: 'DELETE',
     });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
   }
 }
 

@@ -1,17 +1,21 @@
-import { toast } from 'sonner';
-
-export function showSuccess(message: string) {
-  toast.success(message);
-}
+import { toast as sonnerToast } from 'sonner';
 
 export function showError(message: string) {
-  toast.error(message);
+  sonnerToast.error(message);
+}
+
+export function showSuccess(message: string) {
+  sonnerToast.success(message);
 }
 
 export function showInfo(message: string) {
-  toast.info(message);
+  sonnerToast.info(message);
 }
 
 export function showWarning(message: string) {
-  toast.warning(message);
+  sonnerToast.warning(message);
+}
+
+export function showExtraFilesToast() {
+  sonnerToast.info('Fichiers supplémentaires ajoutés');
 }

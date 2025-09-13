@@ -89,6 +89,7 @@
     "drizzle-kit": "^0.30.6",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.0.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "worker-loader": "^3.0.8"
   }
 }
