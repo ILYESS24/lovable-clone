@@ -1,28 +1,17 @@
 'use client';
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { 
-  Sparkles, 
-  ArrowUp,
-  Paperclip,
-  Link,
-  HelpCircle,
-  Github,
-  Figma,
-  Server,
-  Code,
-  Zap,
   ChevronDown,
-  Bell,
-  User,
-  Plus,
   MessageCircle,
   Linkedin,
   Twitter,
-  Youtube,
-  Instagram,
-  ArrowRight
+  Github,
+  Figma,
+  Link,
+  Sparkles,
+  HelpCircle,
+  ArrowUpRight
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -31,38 +20,32 @@ export default function HomePage() {
   const [inputValue, setInputValue] = useState('');
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
       {/* Navigation */}
-      <nav className="border-b border-gray-800 bg-black/80 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="border-b border-gray-800 bg-black/20 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-white">Fusion</span>
+              <span className="text-xl font-bold text-white">bolt</span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Community</a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Enterprise</a>
+              <a href="#" className="text-white hover:text-gray-300 transition-colors">Community</a>
+              <a href="#" className="text-white hover:text-gray-300 transition-colors">Enterprise</a>
               <div className="flex items-center space-x-1">
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">Resources</a>
-                <ChevronDown className="w-4 h-4 text-gray-300" />
+                <a href="#" className="text-white hover:text-gray-300 transition-colors">Resources</a>
+                <ChevronDown className="w-4 h-4 text-white" />
               </div>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Careers</a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
+              <a href="#" className="text-white hover:text-gray-300 transition-colors">Careers</a>
+              <a href="#" className="text-white hover:text-gray-300 transition-colors">Pricing</a>
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <MessageCircle className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer" />
-                <Linkedin className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer" />
-                <Twitter className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer" />
-                <MessageCircle className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer" />
-                <Plus className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer" />
-                <Bell className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer" />
-                <User className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer" />
+              <div className="flex items-center space-x-3">
+                <MessageCircle className="w-5 h-5 text-white hover:text-gray-300 cursor-pointer" />
+                <Linkedin className="w-5 h-5 text-white hover:text-gray-300 cursor-pointer" />
+                <Twitter className="w-5 h-5 text-white hover:text-gray-300 cursor-pointer" />
+                <MessageCircle className="w-5 h-5 text-white hover:text-gray-300 cursor-pointer" />
               </div>
             </div>
           </div>
@@ -70,8 +53,8 @@ export default function HomePage() {
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col items-center justify-center px-4 py-20">
-        <div className="max-w-4xl mx-auto text-center">
+      <main className="flex-1 flex flex-col items-center justify-center px-4 py-20 relative">
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           {/* Header */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -79,17 +62,12 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 mb-6">
-              <Sparkles className="w-4 h-4 mr-2" />
-              INTRODUCING FUSION
-            </Badge>
-            
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
-              What should we build?
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight text-white">
+              What should we build today?
             </h1>
             
-            <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-              using your existing design & code context
+            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+              Create stunning apps & websites by chatting with AI.
             </p>
           </motion.div>
 
@@ -101,149 +79,139 @@ export default function HomePage() {
             className="relative mb-8"
           >
             <div className="relative">
-              {/* Left Icon */}
-              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
-                <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
-                  <Code className="w-6 h-6 text-white" />
-                </div>
-              </div>
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Type your idea and we'll build it together."
+                className="w-full max-w-4xl h-16 px-6 bg-gray-900/30 border border-gray-700 rounded-2xl text-white text-lg placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 backdrop-blur-sm"
+              />
               
-              {/* Curved Line */}
-              <div className="absolute left-16 top-1/2 transform -translate-y-1/2 z-5">
-                <svg width="100" height="20" viewBox="0 0 100 20" className="text-blue-400">
-                  <path 
-                    d="M0 10 Q50 0 100 10" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    fill="none"
-                    className="opacity-60"
-                  />
-                </svg>
-              </div>
-
-              {/* Main Input */}
-              <div className="relative">
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Ask Fusion to build a complete and production ready CRM |"
-                  className="w-full max-w-4xl h-20 px-6 pl-32 pr-20 bg-gray-900/50 border border-gray-700 rounded-2xl text-white text-lg placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 backdrop-blur-sm"
-                />
-                
-                {/* Input Icons */}
-                <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex items-center space-x-3">
-                  <ArrowUp className="w-6 h-6 text-blue-500 cursor-pointer hover:text-blue-400 transition-colors" />
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Icons */}
-            <div className="flex items-center justify-between mt-4 px-6">
-              <div className="flex items-center space-x-4">
-                <button className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors">
-                  <Plus className="w-4 h-4" />
-                  <span className="text-sm">Attach</span>
-                </button>
+              {/* Input Icons */}
+              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-3">
+                <Link className="w-4 h-4 text-gray-400" />
+                <Sparkles className="w-4 h-4 text-gray-400" />
+                <HelpCircle className="w-4 h-4 text-gray-400" />
               </div>
             </div>
           </motion.div>
 
-          {/* Integration Buttons */}
+          {/* Import Options */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-4 mb-16"
+            className="mb-16"
           >
-            <Button 
-              variant="outline" 
-              className="bg-gray-900/50 border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white h-12 px-6"
-            >
-              <Github className="w-5 h-5 mr-2" />
-              Connect a repo
-            </Button>
-            <Button 
-              variant="outline" 
-              className="bg-gray-900/50 border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white h-12 px-6"
-            >
-              <Figma className="w-5 h-5 mr-2" />
-              Figma Import
-            </Button>
-            <Button 
-              variant="outline" 
-              className="bg-gray-900/50 border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white h-12 px-6"
-            >
-              <Server className="w-5 h-5 mr-2" />
-              MCP Servers
-            </Button>
-            <Button 
-              variant="outline" 
-              className="bg-gray-900/50 border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white h-12 px-6"
-            >
-              <Code className="w-5 h-5 mr-2" />
-              Get Extension
-            </Button>
-          </motion.div>
-
-          {/* Glowing Arc */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="relative w-full max-w-6xl mx-auto"
-          >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-full h-32 relative">
-                {/* Outer Glow */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent rounded-full blur-xl"></div>
-                {/* Inner Arc */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-full"></div>
-                {/* Main Arc */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/30 to-transparent rounded-full"></div>
-              </div>
+            <p className="text-gray-400 mb-4">or import from</p>
+            <div className="flex justify-center gap-4">
+              <Button 
+                variant="outline" 
+                className="bg-gray-900/30 border-gray-700 text-white hover:bg-gray-800 hover:text-white h-12 px-6"
+              >
+                <Figma className="w-5 h-5 mr-2" />
+                Figma
+              </Button>
+              <Button 
+                variant="outline" 
+                className="bg-gray-900/30 border-gray-700 text-white hover:bg-gray-800 hover:text-white h-12 px-6"
+              >
+                <Github className="w-5 h-5 mr-2" />
+                GitHub
+              </Button>
             </div>
           </motion.div>
         </div>
+
+        {/* Glowing Arc - Exactement comme dans l'image */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="absolute bottom-0 left-0 right-0 h-64 overflow-hidden"
+        >
+          <div className="relative w-full h-full">
+            {/* Arc principal - courbe exacte comme dans l'image */}
+            <svg 
+              className="absolute bottom-0 left-0 w-full h-full" 
+              viewBox="0 0 1200 200" 
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="transparent" />
+                  <stop offset="20%" stopColor="rgba(59, 130, 246, 0.3)" />
+                  <stop offset="50%" stopColor="rgba(255, 255, 255, 0.8)" />
+                  <stop offset="80%" stopColor="rgba(59, 130, 246, 0.3)" />
+                  <stop offset="100%" stopColor="transparent" />
+                </linearGradient>
+                <linearGradient id="arcGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="transparent" />
+                  <stop offset="20%" stopColor="rgba(59, 130, 246, 0.6)" />
+                  <stop offset="50%" stopColor="rgba(59, 130, 246, 1)" />
+                  <stop offset="80%" stopColor="rgba(59, 130, 246, 0.6)" />
+                  <stop offset="100%" stopColor="transparent" />
+                </linearGradient>
+              </defs>
+              
+              {/* Arc principal blanc avec glow bleu */}
+              <path 
+                d="M0,150 Q300,50 600,100 T1200,80 L1200,200 L0,200 Z" 
+                fill="url(#arcGradient)"
+                className="animate-pulse"
+              />
+              
+              {/* Glow bleu en arrière-plan */}
+              <path 
+                d="M0,160 Q300,60 600,110 T1200,90 L1200,200 L0,200 Z" 
+                fill="url(#arcGlow)"
+                className="blur-sm opacity-60"
+              />
+            </svg>
+          </div>
+        </motion.div>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 bg-black py-8">
+      <footer className="border-t border-gray-800 bg-black/20 backdrop-blur-sm py-8 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded flex items-center justify-center">
-                <Zap className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-lg font-semibold text-white">Fusion</span>
+              <span className="text-lg font-semibold text-white">bolt</span>
             </div>
             
             <div className="text-sm text-gray-400 mb-4 md:mb-0">
-              © 2025 Fusion - All rights reserved.
+              © 2025 StackBlitz - All rights reserved.
             </div>
             
             <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-400">
               <div className="flex flex-col space-y-2">
                 <span className="font-semibold text-white mb-2">Resources</span>
                 <a href="#" className="hover:text-white transition-colors flex items-center">
-                  Support <ArrowRight className="w-3 h-3 ml-1" />
+                  Support <ArrowUpRight className="w-3 h-3 ml-1" />
                 </a>
                 <a href="#" className="hover:text-white transition-colors flex items-center">
-                  Blog <ArrowRight className="w-3 h-3 ml-1" />
+                  Blog <ArrowUpRight className="w-3 h-3 ml-1" />
                 </a>
                 <a href="#" className="hover:text-white transition-colors flex items-center">
-                  Gallery <ArrowRight className="w-3 h-3 ml-1" />
+                  Gallery <ArrowUpRight className="w-3 h-3 ml-1" />
                 </a>
                 <a href="#" className="hover:text-white transition-colors flex items-center">
-                  Status <ArrowRight className="w-3 h-3 ml-1" />
+                  Status <ArrowUpRight className="w-3 h-3 ml-1" />
                 </a>
               </div>
               
               <div className="flex flex-col space-y-2">
                 <span className="font-semibold text-white mb-2">Company</span>
-                <a href="#" className="hover:text-white transition-colors">Careers</a>
-                <a href="#" className="hover:text-white transition-colors">Privacy</a>
-                <a href="#" className="hover:text-white transition-colors">Terms</a>
+                <a href="#" className="hover:text-white transition-colors flex items-center">
+                  Careers <ArrowUpRight className="w-3 h-3 ml-1" />
+                </a>
+                <a href="#" className="hover:text-white transition-colors flex items-center">
+                  Privacy <ArrowUpRight className="w-3 h-3 ml-1" />
+                </a>
+                <a href="#" className="hover:text-white transition-colors flex items-center">
+                  Terms <ArrowUpRight className="w-3 h-3 ml-1" />
+                </a>
               </div>
               
               <div className="flex flex-col space-y-2">
@@ -251,9 +219,9 @@ export default function HomePage() {
                 <div className="flex items-center space-x-3">
                   <MessageCircle className="w-4 h-4 hover:text-white cursor-pointer" />
                   <Linkedin className="w-4 h-4 hover:text-white cursor-pointer" />
-                  <Youtube className="w-4 h-4 hover:text-white cursor-pointer" />
+                  <MessageCircle className="w-4 h-4 hover:text-white cursor-pointer" />
                   <Twitter className="w-4 h-4 hover:text-white cursor-pointer" />
-                  <Instagram className="w-4 h-4 hover:text-white cursor-pointer" />
+                  <MessageCircle className="w-4 h-4 hover:text-white cursor-pointer" />
                   <MessageCircle className="w-4 h-4 hover:text-white cursor-pointer" />
                 </div>
               </div>
