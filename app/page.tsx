@@ -11,13 +11,57 @@ import {
   Link,
   Sparkles,
   HelpCircle,
-  ArrowUpRight
+  ArrowUpRight,
+  ArrowUp
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 export default function HomePage() {
   const [inputValue, setInputValue] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleGenerateApp = async () => {
+    if (!inputValue.trim() || isGenerating) return;
+
+    setIsGenerating(true);
+    try {
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt: inputValue,
+          projectType: 'web-app'
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        // Sauvegarder le projet généré
+        await fetch('/api/projects', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: 'Application Générée',
+            description: data.project.description,
+            files: data.project.files
+          }),
+        });
+
+        // Rediriger vers l'éditeur
+        window.location.href = '/editor';
+      }
+    } catch (error) {
+      console.error('Error generating app:', error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
@@ -84,7 +128,12 @@ export default function HomePage() {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Type your idea and we'll build it together."
-                className="w-full max-w-4xl h-16 px-6 bg-gray-900/30 border border-gray-700 rounded-2xl text-white text-lg placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 backdrop-blur-sm"
+                className="w-full max-w-4xl h-16 px-6 pr-20 bg-gray-900/30 border border-gray-700 rounded-2xl text-white text-lg placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 backdrop-blur-sm"
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && inputValue.trim()) {
+                    handleGenerateApp();
+                  }
+                }}
               />
               
               {/* Input Icons */}
@@ -93,6 +142,19 @@ export default function HomePage() {
                 <Sparkles className="w-4 h-4 text-gray-400" />
                 <HelpCircle className="w-4 h-4 text-gray-400" />
               </div>
+
+              {/* Send Button */}
+              <button
+                onClick={handleGenerateApp}
+                disabled={!inputValue.trim() || isGenerating}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed rounded-xl flex items-center justify-center transition-colors"
+              >
+                {isGenerating ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <ArrowUp className="w-5 h-5 text-white" />
+                )}
+              </button>
             </div>
           </motion.div>
 
