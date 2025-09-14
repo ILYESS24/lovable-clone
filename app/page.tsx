@@ -24,40 +24,79 @@ export default function HomePage() {
   const handleGenerateApp = async () => {
     if (!inputValue.trim() || isGenerating) return;
 
+    console.log('🚀 Génération d\'application pour:', inputValue);
     setIsGenerating(true);
+    
     try {
-      const response = await fetch('/api/generate', {
+      // Simulation de génération pour test
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Créer un projet de test
+      const testProject = {
+        name: 'Application Générée',
+        description: `Application basée sur: ${inputValue}`,
+        files: {
+          'package.json': JSON.stringify({
+            name: "generated-app",
+            version: "1.0.0",
+            dependencies: {
+              "react": "^18.0.0",
+              "react-dom": "^18.0.0",
+              "typescript": "^4.9.0",
+              "tailwindcss": "^3.0.0"
+            }
+          }, null, 2),
+          'src/App.tsx': `import React from 'react';
+
+function App() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">
+          ${inputValue}
+        </h1>
+        <p className="text-gray-600">
+          Application générée avec succès !
+        </p>
+        <div className="mt-6">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            Commencer
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;`,
+          'src/styles/globals.css': `@tailwind base;
+@tailwind components;
+@tailwind utilities;`
+        }
+      };
+
+      // Sauvegarder le projet
+      const response = await fetch('/api/projects', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          prompt: inputValue,
-          projectType: 'web-app'
-        }),
+        body: JSON.stringify(testProject),
       });
 
-      const data = await response.json();
-      
-      if (data.success) {
-        // Sauvegarder le projet généré
-        await fetch('/api/projects', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: 'Application Générée',
-            description: data.project.description,
-            files: data.project.files
-          }),
-        });
-
+      if (response.ok) {
+        console.log('✅ Projet sauvegardé, redirection vers l\'éditeur');
         // Rediriger vers l'éditeur
+        window.location.href = '/editor';
+      } else {
+        console.error('❌ Erreur lors de la sauvegarde');
+        // Rediriger quand même pour tester
         window.location.href = '/editor';
       }
     } catch (error) {
-      console.error('Error generating app:', error);
+      console.error('❌ Erreur lors de la génération:', error);
+      // Rediriger quand même pour tester
+      window.location.href = '/editor';
     } finally {
       setIsGenerating(false);
     }
