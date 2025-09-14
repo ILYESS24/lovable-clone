@@ -1,0 +1,40 @@
+{
+  "name": "@bolt-builder/runner",
+  "version": "1.0.0",
+  "description": "Code execution and preview runner with WebContainers support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts,.tsx",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "start:webcontainer": "node dist/webcontainer.js",
+    "start:docker": "docker-compose up"
+  },
+  "dependencies": {
+    "@webcontainer/api": "^1.1.0",
+    "express": "^4.18.0",
+    "cors": "^2.8.5",
+    "ws": "^8.14.0",
+    "chokidar": "^3.5.0",
+    "nanoid": "^5.0.0",
+    "compression": "^1.7.4",
+    "helmet": "^7.0.0",
+    "rate-limiter-flexible": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/express": "^4.17.0",
+    "@types/cors": "^2.8.0",
+    "@types/ws": "^8.5.0",
+    "@types/compression": "^1.7.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "eslint": "^8.0.0"
+  }
+}

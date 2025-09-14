@@ -1,88 +1,277 @@
-# 🚀 Lovable Clone - Plateforme de Développement avec IA
+# 🚀 Bolt Builder
 
-Une application web moderne inspirée de Lovable.dev, construite avec Next.js 15, React 19, TypeScript et Tailwind CSS.
+> **AI App Builder** - Generate, edit, preview and deploy web applications from natural language prompts
 
-## ✨ Fonctionnalités
+[![CI/CD](https://github.com/bolt-builder/bolt-builder/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/bolt-builder/bolt-builder/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
 
-- 🤖 **IA Intégrée** - GPT-4, Claude et autres modèles IA avancés
-- 💻 **Éditeur de Code** - Monaco Editor avec auto-complétion IA
-- 🌐 **Déploiement Auto** - Déploiement sur Vercel, Netlify en un clic
-- 👥 **Collaboration** - Travail en équipe avec partage en temps réel
-- 🎨 **Design System** - Composants UI modernes avec Tailwind CSS
-- 🗄️ **Base de Données** - PostgreSQL, MongoDB, Supabase intégrés
+## ✨ Features
 
-## 🛠️ Technologies
-
-- **Frontend :** Next.js 15, React 19, TypeScript
-- **Styling :** Tailwind CSS, Framer Motion
-- **UI Components :** Radix UI, Lucide React
-- **State Management :** Zustand, TanStack Query
-- **IA :** OpenAI, Anthropic Claude
-- **Éditeur :** Monaco Editor
-- **Déploiement :** Vercel
-
-## 🚀 Installation
-
-```bash
-# Cloner le repository
-git clone https://github.com/ILYESS24/lovable-clone.git
-cd lovable-clone
-
-# Installer les dépendances
-npm install
-
-# Lancer en mode développement
-npm run dev
-```
-
-## 📦 Scripts Disponibles
-
-```bash
-npm run dev      # Serveur de développement
-npm run build    # Build de production
-npm run start    # Serveur de production
-npm run lint     # Linting ESLint
-```
+- 🤖 **AI Code Generation** - Generate complete web applications from natural language prompts
+- 🎨 **Visual Editor** - Monaco Editor with syntax highlighting and IntelliSense
+- 🔄 **Live Preview** - Real-time preview with WebContainers integration
+- 🚀 **One-Click Deploy** - Deploy to Vercel, Netlify, or GitHub Pages
+- 🔧 **Framework Support** - Next.js, Vite, Svelte, Astro
+- 📱 **Responsive Design** - Mobile-first, modern UI components
+- 🔒 **Secure** - Rate limiting, input sanitization, and secure defaults
+- 💰 **Cost Control** - Token budgeting and usage monitoring
 
 ## 🏗️ Architecture
 
 ```
-lovable-clone/
-├── app/                    # Next.js App Router
-│   ├── globals.css        # Styles globaux
-│   ├── layout.tsx         # Layout principal
-│   ├── page.tsx           # Page d'accueil
-│   └── providers.tsx      # Providers React
-├── components/            # Composants réutilisables
-│   └── ui/               # Composants UI de base
-├── lib/                  # Utilitaires
-└── Configuration files   # Configs parfaites
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │   Agent LLM     │    │   Runner        │
+│   (Web UI)      │◄──►│   (Code Gen)    │◄──►│   (Preview)     │
+│                 │    │                 │    │                 │
+│ • Monaco Editor │    │ • Anthropic     │    │ • WebContainers │
+│ • File Tree     │    │ • OpenAI        │    │ • Docker        │
+│ • Preview Pane  │    │ • Templates     │    │ • Live Reload   │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-## 🎨 Design
+## 🚀 Quick Start
 
-- **Design moderne** avec gradients et animations
-- **Responsive** pour tous les appareils
-- **Dark/Light mode** supporté
-- **Animations fluides** avec Framer Motion
-- **Composants accessibles** avec Radix UI
+### Prerequisites
 
-## 🚀 Déploiement
+- Node.js 18+ 
+- pnpm 8+
+- Git
 
-L'application est prête pour le déploiement sur Vercel :
+### One-Click Setup
 
-1. Connectez votre repository GitHub à Vercel
-2. Configurez les variables d'environnement
-3. Déployez automatiquement
+```bash
+# Clone the repository
+git clone https://github.com/bolt-builder/bolt-builder.git
+cd bolt-builder
 
-## 📄 Licence
+# Bootstrap the monorepo
+pnpm bootstrap
 
-MIT License - Voir le fichier LICENSE pour plus de détails.
+# Start development servers
+pnpm dev
+```
 
-## 👨‍💻 Auteur
+### Manual Setup
 
-**BuilderAI Team** - Créé avec ❤️ pour la communauté développeur
+```bash
+# Install dependencies
+pnpm install
+
+# Start individual services
+pnpm dev:web      # Web UI (http://localhost:3000)
+pnpm dev:agent    # LLM Agent (http://localhost:3001)
+pnpm dev:runner   # Preview Runner (http://localhost:3002)
+```
+
+## 🎯 Usage
+
+### Generate from Prompt
+
+```bash
+# Generate a todo app
+pnpm generate "Create a todo app with React and TypeScript"
+
+# Generate with specific framework
+pnpm generate "Create a blog" nextjs
+```
+
+### Convert Electron to Web
+
+```bash
+# Convert an existing Electron app
+pnpm convert-electron /path/to/electron-app
+```
+
+### Web UI
+
+1. Open http://localhost:3000
+2. Enter your prompt in the input field
+3. Click "Generate" to create your app
+4. Edit code in the Monaco Editor
+5. Preview in real-time
+6. Deploy with one click
+
+## 📁 Project Structure
+
+```
+bolt-builder/
+├── webapp/           # Next.js frontend
+│   ├── app/         # App Router pages
+│   ├── components/  # React components
+│   └── lib/         # Utilities
+├── agent/           # LLM Agent service
+│   ├── src/         # TypeScript source
+│   └── templates/   # Code templates
+├── runner/          # Preview runner
+│   ├── src/         # Execution engine
+│   └── docker/      # Docker configs
+├── infra/           # Infrastructure
+│   ├── .github/     # GitHub Actions
+│   ├── vercel.json  # Vercel config
+│   └── netlify.toml # Netlify config
+├── scripts/         # Utility scripts
+└── docs/           # Documentation
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create `.env.local` in the webapp directory:
+
+```env
+# LLM Providers
+ANTHROPIC_API_KEY=your_anthropic_key
+OPENAI_API_KEY=your_openai_key
+
+# Database
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_key
+
+# Storage
+REDIS_URL=your_redis_url
+
+# Payments
+STRIPE_SECRET_KEY=your_stripe_key
+
+# Authentication
+CLERK_SECRET_KEY=your_clerk_key
+```
+
+### Framework Templates
+
+Supported frameworks:
+- **Next.js** - Full-stack React framework
+- **Vite** - Fast build tool and dev server
+- **Svelte** - Compile-time optimized framework
+- **Astro** - Content-focused static site generator
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+```bash
+# Deploy to Vercel
+vercel --prod
+
+# Or use GitHub integration
+git push origin main
+```
+
+### Netlify
+
+```bash
+# Deploy to Netlify
+netlify deploy --prod
+
+# Or use GitHub integration
+git push origin main
+```
+
+### Docker
+
+```bash
+# Build and run with Docker
+docker-compose up --build
+```
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+pnpm test
+
+# Run specific test suites
+pnpm test:unit
+pnpm test:integration
+pnpm test:e2e
+
+# Run with coverage
+pnpm test:coverage
+```
+
+## 📊 Monitoring
+
+- **Sentry** - Error tracking and performance monitoring
+- **Analytics** - Usage metrics and user behavior
+- **Billing** - Cost tracking and alerts
+- **Health Checks** - Service status monitoring
+
+## 🔒 Security
+
+- **Rate Limiting** - API request throttling
+- **Input Sanitization** - Prompt and output cleaning
+- **CORS** - Cross-origin resource sharing
+- **Authentication** - User management and authorization
+- **Secrets Management** - Secure environment variables
+
+## 💰 Cost Control
+
+- **Token Budgeting** - Per-user token limits
+- **Caching** - Response caching to reduce API calls
+- **Usage Tracking** - Monitor API usage and costs
+- **Trial Mode** - Limited features for free users
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+### Development Guidelines
+
+- Use TypeScript for all new code
+- Follow the existing code style
+- Write tests for new features
+- Update documentation
+- Use conventional commits
+
+## 📚 Documentation
+
+- [Architecture Guide](docs/architecture.md)
+- [API Reference](docs/api.md)
+- [Deployment Guide](docs/deployment.md)
+- [Security Guide](docs/security.md)
+- [Contributing Guide](docs/contributing.md)
+
+## 🆘 Support
+
+- **GitHub Issues** - Bug reports and feature requests
+- **Discord** - Community support and discussions
+- **Email** - support@bolt-builder.com
+- **Documentation** - [docs.bolt-builder.com](https://docs.bolt-builder.com)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/) - Code editor
+- [WebContainers](https://webcontainers.io/) - Browser-based Node.js runtime
+- [Anthropic](https://anthropic.com/) - Claude AI model
+- [OpenAI](https://openai.com/) - GPT models
+- [Vercel](https://vercel.com/) - Deployment platform
+- [Next.js](https://nextjs.org/) - React framework
+
+## 🗺️ Roadmap
+
+- [ ] **Q1 2024** - Plugin system and marketplace
+- [ ] **Q2 2024** - Visual prompt composer
+- [ ] **Q3 2024** - GitHub integration and auto-deploy
+- [ ] **Q4 2024** - Mobile app and offline support
 
 ---
 
-**🎉 Application Lovable Clone - Architecture parfaite, design professionnel, zéro erreur !**
+<div align="center">
+  <strong>Built with ❤️ by the Bolt Builder team</strong>
+  <br>
+  <a href="https://bolt-builder.com">Website</a> •
+  <a href="https://docs.bolt-builder.com">Docs</a> •
+  <a href="https://discord.gg/bolt-builder">Discord</a> •
+  <a href="https://twitter.com/bolt_builder">Twitter</a>
+</div>
